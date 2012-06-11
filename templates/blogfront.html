@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+    <LINK href="../static/blog.css" rel="stylesheet" type="text/css">
+    <body>
+    
+    <div class="heading">
+
+        <div class="title">Scribbler
+            <span class="mini-title">a collection of odds and ends</span>
+        </div>
+        <div class="h-links">
+            <a class="h-links" href="http://rieya-uc.appspot.com/archive">Archive</a>
+            <a class="h-links" href="http://rieya-uc.appspot.com/tags">Tags</a>
+            <a class="h-links" href="http://rieya-uc.appspot.com/email">Email</a>
+        </div>
+    </div>
+
+    {%for p in posts %}
+    <div class="post">
+        <div class="post-title">
+            <div class="p-title"> {{p.title}} </div>
+            <div class="p-date"><i>{{p.date.strftime('%d-%b-%Y')}}</i></div>
+            <hr/>
+
+        </div>
+
+
+        <div class="post-content"> {{p.content}}
+
+        <p> Yadda yadda yadda, random link for testing <a href="http://www.reddit.com">don't go here</a>. No really, don't go
+        
+        </div>
+
+        <div class="post-tags">
+            <hr/>
+            
+            <span class = "p-tag"> tag1 </span>
+            <span class = "p-tag"> tag2 </span>
+            
+        </div>
+    </div>
+    {% endfor %}
+
+    </body>
+</html>
+

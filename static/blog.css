@@ -1,0 +1,121 @@
+body {
+    white-space:normal;
+    margin-left:auto;
+    margin-right:auto;
+    text-wrap: normal;
+}
+
+.heading {
+    position: relative;
+    height: 120px;
+    margin-left: 60px;
+    top: 30px;
+    background:url('../static/slice.png') top right repeat-x;
+    font-family: verdana;
+    white-space:nowrap;
+    text-wrap: supress;
+}
+
+ .title {
+    position: relative;
+    margin-left:35px;
+    top: 24%;
+    font-size: 60px;
+}
+
+.mini-title {
+    position: relative;
+    font-size: 16px;
+    left:-20px;
+}
+
+.h-links {
+    position: relative;
+    margin-top:-100px;
+    text-align: right;
+    margin-right: 15px;
+    word-spacing:30px;
+    text-wrap: normal;
+}
+
+a.h-links:link {
+    color: 	#2d2d2d ;
+    text-decoration: none;
+}
+a.h-links:visited {
+    color: 	#2d2d2d ;
+    text-decoration: none;
+}
+a.h-links:hover {
+    text-decoration: underline;
+    color: 	#2d2d2d ;
+}
+
+.post {
+    position: relative;
+    font-family: calibri;
+    font-size: 1em;
+    color:#2d2d2d;
+    top: 50px;
+
+    margin: 0 auto 0 auto;
+    max-width: 700px;
+
+}
+
+
+.p-title {
+    position: relative;
+    text-align: left;
+    margin-left:-1px;
+    text-wrap: supress;
+    font-size: 40px;
+
+}
+
+.p-date {
+    position: relative;
+    text-align: right;
+    color: gray;
+    font-size: 16px;
+    float: right;
+}
+
+div.post-title hr {
+    border: 0;
+    //color: #E8E8E8;
+    //background-color: #E8E8E8;
+    color: LightGray;
+    background-color: LightGray;
+    margin-bottom: 30px;
+    margin-top: -1px;
+    height: 1px;
+
+}
+
+a.post:link {
+    color:gray;
+    text-decoration: none;
+    text-align: right;
+    margin: auto;
+}
+
+.post-content {
+    text-align: left;
+    line-height: 150%;
+    margin-bottom: 30px;
+}
+
+div.post-tags hr {
+    border: 0;
+    color: #E8E8E8;
+    background-color: #E8E8E8;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 1px;
+}
+
+.post-tags {
+    color: gray;
+    margin-bottom: 80px;
+}
