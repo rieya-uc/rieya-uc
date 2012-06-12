@@ -6,10 +6,11 @@
     
     <div class="heading">
 
-        <div class="title">Scribbler
+        <div class="title"><a class="t-links" href="http://rieya-uc.appspot.com/">Scribbler</a>
             <span class="mini-title">a collection of odds and ends</span>
         </div>
         <div class="h-links">
+            <a class="h-links" href="http://rieya-uc.appspot.com/">Home</a>
             <a class="h-links" href="http://rieya-uc.appspot.com/archive">Archive</a>
             <a class="h-links" href="http://rieya-uc.appspot.com/tags">Tags</a>
             <a class="h-links" href="http://rieya-uc.appspot.com/email">Email</a>
@@ -19,25 +20,22 @@
     {%for p in posts %}
     <div class="post">
         <div class="post-title">
-            <div class="p-title"> {{p.title}} </div>
-            <div class="p-date"><i>{{p.date.strftime('%d-%b-%Y')}}</i></div>
+            <div class="p-title">
+                <a class="p-links" href="/p/{{p.url}}">{{p.title}}</a>
+            </div>
+            <span class="p-date"><i>{{p.date.strftime('%d-%b-%Y')}}</i></span>
             <hr/>
 
         </div>
 
+        <div class="post-content"> {{p.content|safe}}  </div>
 
-        <div class="post-content"> {{p.content}}
-
-        <p> Yadda yadda yadda, random link for testing <a href="http://www.reddit.com">don't go here</a>. No really, don't go
-        
-        </div>
-
+        <div class="permalink"> <a href="/p/{{p.url}}">Permalink</a></div>
         <div class="post-tags">
             <hr/>
-            
-            <span class = "p-tag"> tag1 </span>
-            <span class = "p-tag"> tag2 </span>
-            
+            {% for t in p.tags %}
+            <span class = "p-tag"> {{t}} </span>
+            {% endfor %}        
         </div>
     </div>
     {% endfor %}

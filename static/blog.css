@@ -1,3 +1,5 @@
+html {overflow-y: scroll;}
+
 body {
     white-space:normal;
     margin-left:auto;
@@ -38,18 +40,6 @@ body {
     text-wrap: normal;
 }
 
-a.h-links:link {
-    color: 	#2d2d2d ;
-    text-decoration: none;
-}
-a.h-links:visited {
-    color: 	#2d2d2d ;
-    text-decoration: none;
-}
-a.h-links:hover {
-    text-decoration: underline;
-    color: 	#2d2d2d ;
-}
 
 .post {
     position: relative;
@@ -63,11 +53,11 @@ a.h-links:hover {
 
 }
 
-
 .p-title {
     position: relative;
     text-align: left;
     margin-left:-1px;
+    margin-top: 40px;
     text-wrap: supress;
     font-size: 40px;
 
@@ -79,6 +69,7 @@ a.h-links:hover {
     color: gray;
     font-size: 16px;
     float: right;
+
 }
 
 div.post-title hr {
@@ -93,12 +84,6 @@ div.post-title hr {
 
 }
 
-a.post:link {
-    color:gray;
-    text-decoration: none;
-    text-align: right;
-    margin: auto;
-}
 
 .post-content {
     text-align: left;
@@ -119,3 +104,20 @@ div.post-tags hr {
     color: gray;
     margin-bottom: 80px;
 }
+
+
+a.h-links:link { color:	#2d2d2d ; text-decoration: none; }
+a.h-links:visited { color: #2d2d2d ; text-decoration: none; }
+a.h-links:hover {text-decoration: underline; color:	#2d2d2d; }
+
+a.t-links:link { text-decoration: none; color: black; font-size: 60px; }
+a.t-links:visited { text-decoration: none; color: black; font-size: 60px; }
+a.t-links:hover { text-decoration: none; color: black;  font-size: 60px; }
+
+a.p-links:link { text-decoration: none; color: black; }
+a.p-links:visited { text-decoration: none; color: black; }
+a.p-links:hover { text-decoration: none; color: black; }
+
+
+a.post:link { color:gray; text-decoration: none; text-align: right; margin: auto;}
+

@@ -20,6 +20,7 @@ import jinja2
 from datetime import datetime
 from google.appengine.ext import db
 from lib.DB.bacc import Posts
+import string
 
 template_dir = os.path.join(os.path.dirname(__file__), "templates")
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
@@ -46,12 +47,15 @@ class FrontPageHandler(Handler):
         self.render_page()
 
 class PermaHandler(Handler):
-    def render_page(self):
-        self.render("permalink.html")
+    def render_page(self,post=""):
+        self.render("blogfront.html",posts=post)
 
-    def get(self, p_id):
-        # get p_id 
-        self.render_page()
+    def get(self,pid):
+        p = db.GqlQuery("SELECT * FROM Posts WHERE url = :1", pid)
+        if p.get():
+            self.render_page(p)
+        else:
+            self.redirect("/404")
     
 class NewPostHandler(Handler):
     def render_page(self):
@@ -63,18 +67,36 @@ class NewPostHandler(Handler):
     def post(self):
         title = self.request.get("title")
         content = self.request.get("content")
+        tags = self.request.get("tags")
+
 
         if title and content:
-            posts = Posts(title=title, content=content)
+            url_date = datetime.now().strftime("%Y-%m-%d")
+            url_title = str(title).translate(string.maketrans("",""), \
+                                             string.punctuation)
+            url = url_date + "/" + url_title.lower()
+
+            content = content.replace("\n", "<br>")  # preserve paragraphs
+            
+            t = tags.split() if tags else []
+            
+            posts = Posts(url=url, title=title, content=content, tags=t)
             posts.put()
-            self.redirect("/")
+            
+            self.redirect("/p/"+url)
         else:
             self.write("error posting")
         return
-        
+
+def ErrorHandler(Handler):
+    def get(self):
+        self.error(404)
+        #self.write("404, page not found")
+
 app = webapp2.WSGIApplication([('/',FrontPageHandler),
                                ('/newpost',NewPostHandler),
-                               ('/p/([0-9]+)', PermaHandler),
+                               ('/p/([0-9a-z-//]+)', PermaHandler),
+                               ('/*.', ErrorHandler),
                                ],
                                debug=True)
 

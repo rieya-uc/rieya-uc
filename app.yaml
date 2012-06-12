@@ -11,10 +11,16 @@ handlers:
 
 - url: /static
   static_dir: static
+- url: /p/static
+  static_dir: static
   
 - url: /
   script: handlers.app
 - url: /newpost
+  script: handlers.app
+- url: /p/([0-9a-z-//]+)
+  script: handlers.app
+- url: /.*
   script: handlers.app
 
 
