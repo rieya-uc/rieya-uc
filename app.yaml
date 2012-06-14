@@ -18,6 +18,7 @@ handlers:
   script: handlers.app
 - url: /newpost
   script: handlers.app
+  login: admin
 - url: /p/([0-9a-z-//]+)
   script: handlers.app
 - url: /.*
@@ -29,4 +30,7 @@ libraries:
 - name: webapp2
   version: "2.5.1"
 - name: jinja2                                                                  
-  version: latest                                                               
+  version: latest           
+
+
+                                                    

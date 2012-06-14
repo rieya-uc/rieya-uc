@@ -19,7 +19,8 @@ import webapp2
 import jinja2
 from datetime import datetime
 from google.appengine.ext import db
-from lib.DB.bacc import Posts
+#from lib.DB.Posts import Posts
+import lib.DB.Posts as Posts
 import string
 
 template_dir = os.path.join(os.path.dirname(__file__), "templates")
@@ -39,23 +40,23 @@ class Handler(webapp2.RequestHandler):
 
 class FrontPageHandler(Handler):
     def render_page(self):
-        posts = db.GqlQuery("SELECT * FROM Posts ORDER BY date DESC")
-        #if posts:   # remember that thing about iterating over arts?
-        self.render("blogfront.html",posts=posts)
+        posts = Posts.get_posts()
+        self.render("blogfront.html",posts=posts, message="")
 
     def get(self):
         self.render_page()
 
 class PermaHandler(Handler):
     def render_page(self,post=""):
-        self.render("blogfront.html",posts=post)
+        self.render("blogfront.html",posts=post,message="perma")
 
     def get(self,pid):
-        p = db.GqlQuery("SELECT * FROM Posts WHERE url = :1", pid)
-        if p.get():
-            self.render_page(p)
-        else:
-            self.redirect("/404")
+        p = Posts.get_post(pid)
+        #if p == None:
+        #    self.write("None")
+        #else:
+        #    self.write(p.content)
+        self.render_page(p) if p else self.redirect("/404")
     
 class NewPostHandler(Handler):
     def render_page(self):
@@ -74,15 +75,13 @@ class NewPostHandler(Handler):
             url_date = datetime.now().strftime("%Y-%m-%d")
             url_title = str(title).translate(string.maketrans("",""), \
                                              string.punctuation)
-            url = url_date + "/" + url_title.lower()
+            url = url_date + "/" + url_title.lower().replace(" ","-")
 
             content = content.replace("\n", "<br>")  # preserve paragraphs
             
             t = tags.split() if tags else []
             
-            posts = Posts(url=url, title=title, content=content, tags=t)
-            posts.put()
-            
+            Posts.add_post(url, title, content, t)
             self.redirect("/p/"+url)
         else:
             self.write("error posting")

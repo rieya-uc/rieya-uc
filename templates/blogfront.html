@@ -2,18 +2,20 @@
 
 <html>
     <LINK href="../static/blog.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
     <body>
     
     <div class="heading">
 
-        <div class="title"><a class="t-links" href="http://rieya-uc.appspot.com/">Scribbler</a>
+        <div class="title"><a class="t-links" href="/">Scribbler</a>
             <span class="mini-title">a collection of odds and ends</span>
         </div>
         <div class="h-links">
-            <a class="h-links" href="http://rieya-uc.appspot.com/">Home</a>
-            <a class="h-links" href="http://rieya-uc.appspot.com/archive">Archive</a>
-            <a class="h-links" href="http://rieya-uc.appspot.com/tags">Tags</a>
-            <a class="h-links" href="http://rieya-uc.appspot.com/email">Email</a>
+            <a class="h-links" href="/archive">Archive</a>
+            <a class="h-links" href="/tags">Tags</a>
+            <a class="h-links" href="/email">Email</a>
         </div>
     </div>
 
@@ -29,8 +31,12 @@
         </div>
 
         <div class="post-content"> {{p.content|safe}}  </div>
-
+        {% if message == "perma" %}
+        <div class="permalink"> <a href="/">Home</a></div>
+        {% else %}
         <div class="permalink"> <a href="/p/{{p.url}}">Permalink</a></div>
+        {% endif %}
+
         <div class="post-tags">
             <hr/>
             {% for t in p.tags %}
