@@ -21,6 +21,9 @@ handlers:
   login: admin
 - url: /p/([0-9a-z-//]+)
   script: handlers.app
+- url: /p/([0-9a-z-//]+)/_edit
+  script: handlers.app
+  login: admin
 - url: /.*
   script: handlers.app
 

@@ -4,7 +4,7 @@ body {
     white-space:normal;
     margin-left:auto;
     margin-right:auto;
-    text-wrap: normal;
+    text-wrap: normal; 
 }
 
 .heading {
@@ -37,7 +37,7 @@ body {
     text-align: right;
     margin-right: 15px;
     word-spacing:30px;
-    text-wrap: normal;
+    text-wrap: normal
 }
 
 
@@ -86,6 +86,7 @@ div.post-title hr {
 
 
 .post-content {
+    white-space: pre-wrap;
     text-align: left;
     line-height: 150%;
     margin-bottom: 30px;
@@ -105,6 +106,9 @@ div.post-tags hr {
     margin-bottom: 80px;
 }
 
+code {
+    white-space: pre;
+}
 
 a.h-links:link { color:	#2d2d2d ; text-decoration: none; }
 a.h-links:visited { color: #2d2d2d ; text-decoration: none; }

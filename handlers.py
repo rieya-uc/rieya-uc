@@ -52,15 +52,11 @@ class PermaHandler(Handler):
 
     def get(self,pid):
         p = Posts.get_post(pid)
-        #if p == None:
-        #    self.write("None")
-        #else:
-        #    self.write(p.content)
         self.render_page(p) if p else self.redirect("/404")
     
 class NewPostHandler(Handler):
     def render_page(self):
-        self.render("newpost.html")
+        self.render("newpost.html",post=None)
 
     def get(self):
         self.render_page()
@@ -77,7 +73,7 @@ class NewPostHandler(Handler):
                                              string.punctuation)
             url = url_date + "/" + url_title.lower().replace(" ","-")
 
-            content = content.replace("\n", "<br>")  # preserve paragraphs
+            #content = content.replace("\n", "<br>")  # preserve paragraphs
             
             t = tags.split() if tags else []
             
@@ -87,7 +83,25 @@ class NewPostHandler(Handler):
             self.write("error posting")
         return
 
-def ErrorHandler(Handler):
+class EditHandler(Handler):
+    def render_page(self, post=""):
+        self.render("newpost.html",post=post)
+
+    def get(self, pid):
+        p = Posts.get_post(pid)
+        self.render_page(p.get()) if p else self.redirect("/newpost")
+
+    def post(self, pid):
+        title = self.request.get("title")
+        content = self.request.get("content")
+        tags = self.request.get("tags")
+        t = tags.split() if tags else []
+
+        Posts.edit_post(pid, title, content, t)
+        self.redirect("/")
+
+
+class ErrorHandler(Handler):
     def get(self):
         self.error(404)
         #self.write("404, page not found")
@@ -95,7 +109,8 @@ def ErrorHandler(Handler):
 app = webapp2.WSGIApplication([('/',FrontPageHandler),
                                ('/newpost',NewPostHandler),
                                ('/p/([0-9a-z-//]+)', PermaHandler),
-                               ('/*.', ErrorHandler),
+                               ('/p/([0-9a-z-//]+)/_edit', EditHandler),
+                               ('/.*', ErrorHandler),
                                ],
                                debug=True)
 
